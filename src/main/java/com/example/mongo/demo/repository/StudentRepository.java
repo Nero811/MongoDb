@@ -12,4 +12,7 @@ public interface StudentRepository extends MongoRepository<StudentsPojo, String>
 
     @Query("{name: :#{#name}}")
     StudentsPojo findByName(@Param("name") String name);
+
+    @Query(value="{name: :#{#name}}", delete = true)
+    void delete(@Param("name") String name);
 }

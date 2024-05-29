@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,16 +44,22 @@ public class MogoDbController {
   
         studentRepository.save(student);
 
-        return ResponseEntity.ok().body("創建成功!");
+        return ResponseEntity.ok().body("Update success !");
     }
 
-    @PostMapping("/deleteStudent")
-    public ResponseEntity<String> deleteStudent(@RequestBody StudentsPojo student) {
+    @PostMapping("/updateStudent")
+    public ResponseEntity<String> updateStudent(@RequestBody StudentsPojo student) {
 
-        student.setLastModified(new Date());
-  
         studentRepository.save(student);
 
-        return ResponseEntity.ok().body("創建成功!");
+        return ResponseEntity.ok().body("Update success !");
+    }
+
+    @DeleteMapping("/deleteStudent")
+    public ResponseEntity<String> deleteStudent(@RequestBody StudentsPojo student) {
+
+        studentRepository.delete(student.getName());
+
+        return ResponseEntity.ok().body("Delete success !");
     }
 }
